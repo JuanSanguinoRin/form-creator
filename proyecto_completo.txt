@@ -1,0 +1,2101 @@
+
+Ingeniería de Sistemas, Universidad Francisco de Paula Santander
+18 de Marzo del 2026
+San José de Cúcuta
+
+
+
+Plataforma de encuestas y formularios para empresas
+ (Form-Creator)
+
+
+
+
+
+Integrantes:
+1152295 - Juan David Mendoza Ropero 
+1152304 -  Nicolas Felipe Meneses Peinado 
+1152315 - Angely Sofia Pino Gonzalez 
+1152323 - Juan Sebastian Sanguino Rincon 
+1152322 - Laura Alejandra Caballero Parada 
+1152327 - David Santiago Rincon Bautista 
+
+
+
+
+
+
+
+Análisis y Diseño de Sistemas
+Profesora Judith del Pilar Rodriguez
+
+2. Resumen Ejecutivo
+
+2.1. Objetivo del proyecto de software
+Desarrollar una plataforma web que permite crear formularios personalizables, recopilar respuestas de forma centralizada y generar visualizaciones simples en tiempo real, como proyecto de aprendizaje universitario aplicado a problemas reales.
+2.2 Alcance del sistema desarrollado
+El alcance del sistema Form-Creator incluye la creación de una aplicación web que cubre todo el ciclo de vida de un formulario, desde su creación hasta la visualización de respuestas mediante gráficos dinámicos o su cierre definitivo. La plataforma permite la gestión para dos roles principales: usuario administrador (con todas las funcionalidades de creación, edición, publicación, duplicación, eliminación y análisis de formularios) y respondedor (responder formularios vía enlace, editar respuestas si está configurado y recibir copias por correo). No abarca apps móviles nativas, análisis estadístico avanzado, integraciones con CRM/ERP, pagos o colaboración en tiempo real.
+
+2.3. Principales prácticas de gestión aplicadas
+Form-Creator ha sido concebido bajo una metodología Híbrida que integra elementos de Scrum (Ágil) con prácticas de Gestión Tradicional de Proyectos, específicamente adaptada para los requisitos del proyecto.
+2.4. Resultados obtenidos
+Se completaron cuatro sprints que permitieron implementar progresivamente autenticación de usuarios, diligenciamiento de formularios públicos, envío de copias por correo y un panel de análisis con gráficos. El sistema final incluye backend en Django con MongoDB y frontend en React, proporcionando funcionalidades completas de gestión de formularios, recolección de respuestas y visualización de datos.
+3. Introducción
+
+Contexto del sistema desarrollado
+Es una plataforma web responsiva con frontend en React (para interfaces modulares y gráficos con Recharts), backend en Django 5.1.2 con Django REST Framework (para APIs RESTful y lógica de negocio), y base de datos MongoDB (para datos flexibles de formularios y respuestas). Soporta roles como administrador (crea/gestiona) y respondedor (responde/edita si se permite), con autenticación JWT/Google, generación de enlaces, validaciones y exportación CSV. Desplegada en Vercel (frontend), Railway (backend) y MongoDB Atlas.
+Importancia de aplicar procesos de ingeniería de software
+Se aplican procesos para garantizar estructura, trazabilidad y calidad: desde acta de constitución y SRS, hasta modelado BPMN, casos de uso, backlog priorizado y sprints iterativos. La metodología híbrida justifica formalidad inicial (planificación) con flexibilidad ágil (ejecución en 4 sprints), reduciendo riesgos, alineando requisitos y permitiendo mejoras continuas vía reviews y retrospectivas. Esto asegura mantenibilidad, escalabilidad y cumplimiento de objetivos universitarios aplicados a problemas reales.
+Temas abordados
+Cubre análisis (visión negocio, requisitos funcionales/no funcionales, casos de uso, épicas/historias de usuario), diseño (arquitectura 3 capas, modelo de datos, UI/UX con mockups, APIs), desarrollo (cronograma, sprints, tecnologías), resultados, conclusiones y anexos (manuales, código en GitHub, video demo). Incluye diagramas (BPMN, secuencia, clases), matrices de trazabilidad y 15 historias de usuario priorizadas.
+Estructura del documento
+Organizado en secciones: 
+Introducción
+Objetivos y alcance
+Plataformas/tecnologías
+Metodología
+Modelo de análisis
+Modelo de diseño
+Desarrollo del proyecto (sprints), resultados, conclusiones, recomendaciones, referencias y anexos. Incluye tablas (tecnologías, requerimientos, backlogs) y figuras (diagramas, mockups)
+4. Descripción General del Proyecto de Software
+
+4.1. Descripción del sistema
+Nombre del Sistema: Plataforma de Encuestas y Formularios para Empresas (Form Creator).
+Propósito Principal: El producto de software desarrollado ofrece una serie de funcionalidades destinadas a optimizar la gestión de formularios y la gestión de sus respuestas. 
+Usuarios del sistema: Administradores, usuarios.
+4.2. Alcance del proyecto
+El alcance del proyecto incluye la creación de una aplicación web que cubra todo el ciclo de vida de un formulario, desde su creación hasta la visualización de sus respuestas por gráficos dinámicos, o bien por defecto, su cierre. La plataforma permitirá la gestión de un usuario administrador y un respondedor, donde el administrador tendrá habilitado todas las funcionalidades de gestión de un formulario y el respondedor tendrá habilitado responder un formulario, editar su respuestas enviadas (si el administrador planteó esa configuración)  y recibir una copia de sus propias respuestas al correo. 
+
+4.3. Objetivos del proyecto
+Objetivo General
+Desarrollar una plataforma web que permite crear formularios personalizables, recopilar respuestas de forma centralizada y generar visualizaciones simples en tiempo real, como proyecto de aprendizaje universitario aplicado a problemas reales.
+Objetivos Específicos
+Desarrollar un constructor de formularios dinámicos que facilite la creación de diversos tipos de campos y estilos.
+Implementar un sistema de generación de enlaces únicos para cada formulario, incluyendo la gestión de ventanas de recolección de datos, y validar su funcionamiento con pruebas automatizadas.
+Crear un dashboard de resultados que presenta gráficos interactivos (barras, líneas y pastel) con opciones de filtrado por tiempo y categorías.
+
+5. Gestión del Proyecto de Software
+
+5.1. Metodología de desarrollo utilizada
+El proyecto Form-Creator adopta una metodología híbrida que combina el enfoque tradicional de ingeniería de software con prácticas ágiles Scrum. Esta combinación permite aprovechar la estructura y formalidad de la ingeniería tradicional en la fase inicial de planificación, mientras se mantiene flexibilidad, iteración rápida y feedback continuo durante la ejecución mediante Scrum.
+5.2 Planificación del proyecto
+Cronograma
+
+Actividades del Desarrollo, SCRUM
+MES 1
+MES 2
+MES 3
+MES 4
+Semanas
+S1
+S2
+S3
+S4
+S5
+S6
+S7
+S8
+S9
+S10
+S11
+S12
+S13
+S14
+S15
+S16
+FASE DE PLANIFICACIÓN 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Sprint Backlog - Planificación
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Establecer prioridades a cada requerimiento
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Definir modelado entidad – relación
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Planeación y modelado de requerimientos
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+desarrollo del Product Backlog
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+FASE DE ANÁLISIS Y DISEÑO 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Diseño de arquitectura MVC
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Especificación de casos de uso detallados
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Diseño de la base de datos no relacional
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Diseño de interfaces UI/UX 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Definición de endpoints API REST
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+FASE DE EJECUCIÓN (SCRUM - 4 Sprints)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Sprint 1 (Ejecución)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Desarrollo de la base de datos
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Migración de datos iniciales
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Desarrollo vistas: inicio de usuario, login
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Implementación épica Iniciar Sesión (HU-001, HU-002, HU-003, HU-004)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+y crear formularios (HU-013)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Documentación de las historias de usuario desarrolladas.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Refinamiento y correcciones.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Sprint Review y Retrospectiva
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Sprint 2 (Ejecución)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Desarrollo épica responder formulario (HU-005, HU-006)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Desarrollo Gestión de formularios ( HU-011, HU-012, HU-013, HU-014)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Documentación de las historias de usuario desarrolladas.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Refinamiento y correcciones.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Sprint Review y Retrospectiva
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Sprint 3 (Ejecución)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Desarrollo de Responder Formulario (HU-008, HU-007)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Desarrollo Crear formulario (HU-010)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Documentación de las historias de usuario desarrolladas.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Refinamiento y correcciones.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Sprint Review y Retrospectiva
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Sprint 4 (Ejecución)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Desarrollo Gestión de Encuestas (HU-015)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Documentación de las historias de usuario desarrolladas.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Refinamiento y correcciones.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Sprint Review y Retrospectiva
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+FASE DE CIERRE (Tradicional)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Validación final e integración
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Pruebas de aceptación de usuario (UAT)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Documentación técnica y manuales
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Deployment a producción
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Actividades Principales
+Planificación (Semanas 1-2)
+Acta de constitución del proyecto (Project Charter)
+Modelado del negocio BPMN (EP1)
+Casos de uso de alto nivel (EP3)
+Formación de equipos y asignación de roles SCRUM (Product Owner, Desarrolladores, Scrum Master)
+Estructura por fases, actividades y entregables (D1)
+Análisis de Requisitos (Semanas 3-4)
+Especificación de requerimientos SRS (EP2)
+Levantamiento de requisitos funcionales y no funcionales
+Casos de uso detallados
+Historias de usuario vs casos de uso (D3)
+Product backlog inicial con épicas e historias principales (EP5)
+Diseño (Semanas 5-6)
+Diseño de arquitectura general ADD (EP4)
+Modelo de dominio de alto nivel (D6)
+Modelo de datos (EP6)
+Diseño UI/UX con wireframes y mockups
+Especificación de APIs REST
+
+
+Desarrollo Ágil (Semanas 7-10)
+Sprint 1: Autenticación y gestión de usuarios
+Sprint 2: Creación y gestión básica de formularios
+Sprint 3: Responder formularios y gestión de respuestas
+Sprint 4: Visualización de datos y estadísticas
+Cierre y Validación (Semana 11)
+Pruebas de integración y validación final
+Despliegue en producción (Vercel, Railway, MongoDB Atlas)
+Documentación final (manual usuario, manual sistema, ficha técnica)
+Entregables
+TÍTULO
+RUTA
+DESCRIPCIÓN
+Manual de Usuario
+Manual de Usuario Form-Creator.docx
+
+
+Manual de usuario del software Form Creator
+Manual de Sistema
+Manual del Sistema.docx
+
+
+Documento de la arquitectura, diseño e instalación del software
+Ficha Técnica
+Ficha Técnica del Software.docx
+
+
+Ficha técnica 
+Código fuente 
+https://github.com/nicolasmmm7/form-creator#
+
+
+Presenta el código fuente de la aplicación, desde frontend hasta backend
+URL de la web
+https://form-creator-rosy.vercel.app/
+
+
+Dirección donde se puede acceder a la web
+Video de sustentación
+https://www.youtube.com/watch?v=M3DlMWw3fJo
+
+
+Presentación de las funcionalidades del proyecto
+Documento historias de usuario 
+Formato HU AyD.docx
+Documenta todas las 15 historias de usuario del proyecto Form Creator
+EP0 - Visión
+EP0 - Vision
+Documento que define el propósito general, el alcance, los stakeholders y la justificación del negocio del proyecto
+EP1 - Modelo de negocio BPMN 
+EP1- Modelo de negocio (BPMN) _.docx
+Representación gráfica y descriptiva de los procesos de negocio para la gestión de eventos.
+EP2 - Documento especificación de requerimientos de software 
+EP2- Documento de requisitos (SRS).docx
+Especificación de Requerimientos de Software (SRS)
+EP3 - Casos de uso de alto nivel 
+EP3- Casos_de_Uso_Alto_Nivel.docx
+Diagramas generales y descripciones que identifican a los actores del sistema 
+EP4 - Documento de diseño de arquitectura 
+EP4- ADD -Arquitectura de alto nivel -Modelo del Negocio.docx
+Documento de Diseño de Arquitectura (ADD) que describe la estructura lógica
+EP5 - Backlog de producto 
+EP5-Backlog de Producto y las epicas e historias.docx
+Listado priorizado de funcionalidades
+EP6 - Modelo de datos 
+EP6-Modelo de DATOS.docx
+Definición técnica de la persistencia de datos
+D1 - Estructura por fases, actividades y entregables 
+D1-Estructura  fase Planificacion- actividades y entregables -Metodologia agil.docx
+Documento plan de gestión del proyecto
+D2 - Acta de constitución de especificación del sistema / aplicación software 
+D2- Acta de constitucion de especificacion del sistema
+Documento formal (Project Charter) que autoriza el inicio del proyecto
+D3 - Especificación de historias de usuario vs casos de uso 
+D3- Plantilla de especificacion de HU vs CASOS DE USO.docx
+Matriz de trazabilidad y análisis que vincula las Historias de Usuario (Ágil) con los Casos de Uso detallados
+D4 - Conceptos de casos de uso, épicas e historias de usuario 
+D4 -Conceptos de casos de uso, épicas e historias de usuario.docx
+Marco de referencia teórica sobre los casos de uso, épicas e historias de usuario
+D5 - Fase de planificación: diseño de arquitectura general 
+D5-Fase Planificación  Diseño de Arquitectura General.docx
+Documento donde se establecen los lineamientos arquitectónicos base
+D6 - Modelo de dominio de alto nivel 
+D6-Modelo de Dominio de Alto Nivel.docx
+Representación conceptual de las clases del negocio y sus relaciones principales
+DAC DR Plantilla descripción detallada requisito
+DAC_DR_Plantilla_descripcion_detallada_requisito.docx
+Fichas técnicas que profundizan en requisitos
+
+
+5.3 Organización del equipo
+Product Owner
+Nicolas Felipe Meneses Peinado (1152304) - Responsable de la visión del producto, priorización del backlog, definición de historias de usuario y validación de entregables.​
+Equipo de Desarrollo 
+Juan David Mendoza Ropero (1152295)
+Angely Sofia Pino Gonzalez (1152315)
+Juan Sebastian Sanguino Rincon (1152323)
+Laura Alejandra Caballero Parada (1152322)
+David Santiago Rincon Bautista (1152327)
+Responsables colectivos de la implementación técnica, garantía de calidad, estimación de esfuerzo y entrega de incrementos funcionales.
+Scrum Master
+Nelson Beltrán Galvis - Profesor facilitador de ceremonias Scrum, eliminación de impedimentos, protección del equipo y mejora continua de procesos.
+5.4 Herramientas utilizadas
+Control de Versiones y Colaboración
+GitHub - Repositorio principal del código fuente (https://github.com/nicolasmmm7/form-creator), gestión de cambios y colaboración en equipo.​
+Entornos de Desarrollo Local
+Visual Studio Code (implícito como IDE estándar para React/Django/Python)
+Node.js/npm (puerto 3000) - Gestión de paquetes y servidor de desarrollo frontend.​
+Python Runtime 3.x (puerto 8000) - Ejecución del servidor Django backend.​
+Despliegue y Hosting
+Vercel - Frontend en producción (https://form-creator-rosy.vercel.app)
+Railway - Backend Django en producción.​
+MongoDB Atlas - Base de datos NoSQL en la nube (clúster gratuito).​
+Comunicación y Gestión Ágil
+Discord/Google Meet (implícito para dailys, sprint planning, reviews y retrospectivas Scrum).​
+Documentos Google/Office - Creación de documentos relacionados (SRS, backlog, actas).​
+Jira - Herramienta principal para la organización del equipo, dailys, historias de usuario por persona, etc.
+Herramientas de Modelado
+Draw.io/Lucidchart (implícito para diagramas BPMN, casos de uso, arquitectura).
+6. Gestión de Cambios del Software
+6.1 Proceso de solicitud de cambios
+Todo cambio al sistema Form-Creator debe iniciarse mediante el diligenciamiento de un Formulario de Solicitud de Cambio (CRF), identificado con un número consecutivo (por ejemplo, Solicitud de Cambio N.° 01 – Exportación a PDF de gráficos). El proceso es gestionado por el Comité de Control de Cambios (CCB), conformado por el Gestor de Configuración (Juan David Mendoza Ropero) y el Líder de Proyecto (Nicolás Felipe Meneses Peinado).
+El CRF debe contener, como mínimo:
+Nombre del proyecto y número de solicitud
+Datos del solicitante: nombre, cargo, área y fecha
+Descripción detallada del cambio solicitado
+Justificación del cambio
+Análisis de impacto preliminar: alcance, cronograma, costo, calidad y otros riesgos (recursos, adquisiciones, etc.)
+Una vez registrada, la solicitud pasa al estado "En análisis" y es revisada por el CCB, quien la aprobará o rechazará con base en los criterios definidos. Los cambios aprobados son planificados en Jira y avanzan por los estados: Propuesto → En análisis → Aprobado/Rechazado → En implementación → En pruebas → Cerrado.
+​
+6.2 Registro de solicitudes de cambio
+ID
+Descripción
+Solicitante
+Prioridad
+Estado
+CRF-01
+Exportación a PDF de gráficos del dashboard de resultados
+Angely Sofia Pino González
+Alta
+Cerrado
+
+https://docs.google.com/document/d/1RQ--RGDM5OkpqTQhHvy4uFjP-RTU4-L9/edit?usp=sharing&ouid=116754317278944586078&rtpof=true&sd=true
+El CRF-01 fue aprobado el 05/03/2026 por el Líder de Proyecto, con el concepto: "La funcionalidad propuesta representa una mejora significativa en el valor del producto, especialmente para el perfil de usuario administrador, quien requiere mecanismos formales para compartir, presentar y archivar los resultados de las encuestas".
+
+6.3 Evaluación de impacto
+Antes de aprobar cualquier cambio, el Gestor de Configuración y el equipo técnico analizan su impacto en los siguientes ejes:
+Impacto en tiempo:
+Cada cambio aprobado requiere tiempo adicional de análisis, implementación, pruebas y actualización de documentación. El CCB evalúa si el cambio cabe en el sprint actual o debe planificarse en una iteración posterior, asignando responsables y fechas en Jira.
+Impacto en costo:
+Se evalúa si el cambio implica la incorporación de nuevos servicios de pago, licencias o recursos computacionales adicionales. Para Form-Creator, la política es mantener el uso de servicios gratuitos (Vercel, MongoDB Atlas, Railway en nivel gratuito); cualquier cambio que supere este límite deberá justificarse explícitamente ante el Líder de Proyecto.
+Impacto en funcionalidad:
+Se identifican los ítems de configuración (CI) afectados en el CMR: módulos de frontend (CI-FE-01), backend (CI-BE-01), base de datos (CI-DB-01), autenticación (CI-AU-01), notificaciones (CI-EM-01) y modelos de dominio. Se verifica que el cambio no rompa funcionalidades ya implementadas mediante análisis de dependencias y pruebas de regresión.
+Impacto en arquitectura:
+Se revisa si el cambio modifica la arquitectura actual (React 19 + Django 5.2 + MongoDB + Firebase Authentication + Brevo SMTP), el modelo de datos, la especificación OpenAPI (CI-API-01) o el design system (CI-UI-01). Los cambios que afecten CIs de nivel Crítico (backend, base de datos, autenticación) requieren aprobación explícita del CCB antes de iniciar cualquier implementación.
+
+6.4 Control y aprobación de cambios
+Procedimiento de aprobación
+El CCB revisa cada solicitud en reunión ordinaria (frecuencia semanal en fases de alto desarrollo, quincenal en mantenimiento) o en reunión extraordinaria para cambios urgentes de alto impacto.
+Los criterios de decisión del CCB son:
+Alineación estratégica: el cambio debe estar alineado con los objetivos de negocio de Form-Creator (simplificar recolección de datos, democratizar análisis, eliminar barreras técnicas).
+Impacto en alcance, cronograma, costo y calidad: se evalúa el efecto sobre el plan vigente.
+Impacto en CIs críticos y experiencia de usuario: cambios sobre CI-BE-01, CI-DB-01 o CI-AU-01 reciben escrutinio especial.
+Riesgos técnicos y operativos: se identifican supuestos de riesgo (p. ej. mal formato de PDF, degradación de rendimiento por conversión de gráficas).
+Disponibilidad de recursos: se verifica la capacidad del equipo en el sprint o iteración actual.
+Dependencias con otros cambios: se revisan conflictos o dependencias con otras historias de usuario en el backlog.
+Solo los cambios que superen satisfactoriamente todos estos criterios serán aprobados para implementación. La decisión (Aprobado/Rechazado) queda registrada en el ticket Jira correspondiente con fecha, concepto de aprobación y firma del Líder de Proyecto.
+Criterios de aceptación para cierre del cambio
+Un cambio sólo puede cerrarse como "Cerrado" cuando se cumplan todos los siguientes criterios: 
+Todas las tareas y subtareas en Jira completadas, sin incidencias abiertas relacionadas
+Pruebas unitarias, de integración y de regresión exitosas, con evidencias registradas (capturas, reportes)
+Documentos actualizados: SRS (EP2), ADD (EP4), Modelo de datos (EP6), Manual del sistema y Manual de usuario
+CIs actualizados en el CMR con nueva versión y estado Liberado
+Auditoría de configuración sin no conformidades críticas relacionadas con el cambio
+Aprobación explícita del Gestor de Configuración y del Líder de Proyecto
+
+
+7. Gestión de la Configuración del Software
+En Form‑Creator, la GCS se apoya principalmente en Git y GitHub para el código fuente, y en la estructuración formal de los artefactos generados en las materias de Análisis y Diseño de Sistemas e Ingeniería de Software.
+7.1 Elementos de configuración
+Forman parte de la configuración de software todos los programas, la documentación técnica y de usuario, así como las estructuras de datos que el sistema utiliza.
+Para el proyecto Form‑Creator, se identifican como Elementos de Configuración (EC) los siguientes grupos:
+Código fuente y artefactos ejecutables
+Backend (Django + Django REST Framework): vistas API, modelos de dominio, serializadores, servicios y adaptadores de autenticación con Firebase/MongoDB.
+Frontend (React): componentes de interfaz, contenedores de páginas, lógica de validación en el cliente y componentes de gráficos (Recharts).
+Configuración de proyecto y dependencias: archivos de configuración de Django, React, definiciones de entorno y archivos de dependencias (por ejemplo, requirements y archivos de build de Node).
+Artefactos desplegados: compilaciones de frontend en Vercel y despliegues del backend en Railway que corresponden a versiones específicas del código.
+Documentación técnica del proyecto
+Documento final de Análisis y Diseño de Sistemas (Form‑Creator) que incluye visión, casos de uso, BPMN, modelo de dominio, modelo lógico de datos y diseño de arquitectura.
+Documento “Lineamiento Primer informe IngSoftware 2026‑1”, que resume objetivos, alcance y prácticas de gestión aplicadas.
+Especificaciones de requisitos (funcionales y no funcionales), matrices de trazabilidad, historias de usuario, épicas y backlog de producto.
+Documentos de diseño de APIs (endpoints REST), modelo de datos, y manual de sistema anexos referenciados en el documento final.
+Base de datos y estructuras de datos
+Esquema lógico y físico en MongoDB Atlas: colecciones usuarios, formularios, respondedores y respuestaFormularios, con sus validaciones y reglas de integridad definidas.
+Índices creados para optimizar consultas (por ejemplo, en correo de usuario, administrador del formulario y formulario asociado a respuestas).
+Scripts o comandos de creación de colecciones, validadores JSON Schema y definiciones de índices, que permiten reconstruir el estado de la base de datos.
+Documentación de usuario y operación
+Manual de usuario de Form‑Creator.
+Manual del sistema e instrucciones de instalación y despliegue (incluyendo uso de Railway, Vercel y MongoDB Atlas).
+Ficha técnica del software y anexos que describen características técnicas y configuraciones mínimas.
+Artefactos de pruebas y calidad
+Estrategia de pruebas, casos de prueba y datos de prueba asociados a los principales casos de uso (autenticación, creación de formularios, respuesta de formularios, visualización de gráficos).
+Resultados de pruebas y evidencias usadas en las materias, que pueden considerarse elementos de configuración sujetos a control cuando validan una línea base.
+Modelos y artefactos de diseño de interfaz
+Wireframes, mockups y prototipos de pantallas (por ejemplo, crear formulario, gestionar formularios, responder formulario, dashboards de estadísticas).
+Paleta de colores, estándares de diseño y componentes de UI documentados.
+7.2 Control de versiones
+El control de versiones se realiza utilizando Git con un repositorio alojado en GitHub en la URL: https://github.com/nicolasmmm7/form-creator.
+Este repositorio almacena el código fuente del backend y frontend, permitiendo llevar un historial detallado de cambios mediante commits, comparación entre versiones y reversión en caso de introducir errores.
+Identificación de versiones: cada commit representa una versión de los archivos modificados, con identificador único, autor, fecha y mensaje que explica el cambio realizado.
+Gestión del repositorio de versiones: Git centraliza las versiones aprobadas del código, evitando el “problema de la copia correcta” al asegurar un único repositorio autorizado.
+Historial y trazabilidad de cambios: se puede consultar qué se cambió, quién lo hizo, cuándo y en qué archivos, lo que facilita auditorías de configuración y análisis de impacto.
+Soporte al despliegue: la integración con plataformas como Vercel y Railway se basa en ramas del repositorio, lo que permite relacionar un despliegue concreto con una versión exacta del código.
+7.3 Estrategia de ramas
+Se propone para Form‑Creator una estrategia de ramas sencilla, adecuada al tamaño del equipo y al contexto académico, que favorece la estabilidad de la rama principal y la experimentación controlada.
+Ramas principales:
+main (rama principal/producción): Contiene siempre una versión estable del sistema, asociada a las entregas formales (cierre de sprints, demos y versiones finales presentadas en Análisis y Diseño e Ingeniería de Software). Solo se integra en main código que ha sido probado y validado por el equipo, reduciendo el riesgo de romper la versión utilizada para despliegues en Vercel y Railway.
+
+Ramas de desarrollo por funcionalidad (feature branches): Para nuevas historias de usuario o módulos (por ejemplo, autenticación, creación de formularios, responder formularios, estadísticas), se crean ramas temporales del tipo feature/hu-XXX-descripcion. En estas ramas se realiza el desarrollo y pruebas iniciales; una vez completado y revisado el cambio, la rama se integra en main mediante merge o pull request, asegurando revisión previa.
+
+Ramas de corrección rápida (hotfix, opcional): Ante errores críticos detectados en una versión ya desplegada, se puede crear una rama hotfix/descripcion a partir de main para corregir el problema de forma aislada y luego fusionarla de nuevo en la rama principal.
+
+Esta estrategia de ramas permite:
+Trabajar en paralelo en diferentes funcionalidades sin afectar la estabilidad de main.
+Mantener trazabilidad entre historias de usuario/casos de uso y las ramas donde se implementan.
+Facilitar auditorías y revisiones técnicas, al poder aislar el conjunto de cambios asociados a una funcionalidad o corrección concreta.
+
+7.4 Baselines del proyecto
+En el proyecto Form‑Creator se reconocen las siguientes líneas base relevantes, alineadas con los hitos académicos y de desarrollo:
+Línea base 1 – Documentación de Análisis y Diseño (ADIS)
+Momento: cierre de la materia de Análisis y Diseño de Sistemas.
+Contenido principal: documento final de Análisis y Diseño de Form‑Creator, especificación de requisitos, casos de uso, modelos BPMN, modelo de dominio, modelo lógico de datos y diseño de arquitectura de alto nivel.
+Propósito: servir como referencia estable para el inicio de la implementación y para la trazabilidad entre requisitos y código desarrollado.
+Línea base 2 – Versión funcional intermedia (cierre de sprints clave)
+Momento: cierre de los sprints en los que se completaron autenticación, creación de formularios y respuesta de formularios (por ejemplo, tras sprint 2–3 descritos en el resumen ejecutivo).
+Contenido principal:
+Código backend y frontend en un estado estable en la rama main, desplegado en ambientes de prueba/producción (Railway y Vercel).
+Esquema de base de datos consolidado para gestionar usuarios, formularios y respuestas.
+Documentación actualizada de historias de usuario, casos de uso y validaciones implementadas.
+Propósito: establecer un punto de referencia al que se pueda volver si una funcionalidad avanzada introduce problemas, manteniendo una versión demostrable y coherente del sistema.
+Línea base 3 – Versión final de producto (cierre de Ingeniería de Software)
+Momento: entrega final del proyecto de Ingeniería de Software, con el sistema completo y documentación de gestión, calidad y configuración.
+Contenido principal:
+Código fuente del sistema con todas las funcionalidades comprometidas (gestión completa de formularios, envío de correos, panel de análisis con gráficos y filtros dinámicos), en estado estable.
+Artefactos de despliegue definitivos (configuraciones de Vercel y Railway), más documentación técnica y de usuario revisada.
+Resultados de pruebas, evidencias y documentos de gestión de cambios, configuración, riesgos y calidad elaborados en la materia.
+Propósito: servir como referencia oficial del producto entregado, contra la cual se puedan evaluar futuras mejoras o mantenimientos, y como evidencia de cumplimiento de los objetivos de calidad y alcance.
+
+Cada línea base se asocia a un conjunto concreto de versiones en el repositorio GitHub y a versiones específicas de documentos y esquemas de base de datos, de modo que cualquier modificación posterior debe pasar por un proceso explícito de control de cambios.
+
+8. Gestión de Riesgos del Proyecto
+La gestión de riesgos del proyecto se basa en el material de clase de “Gestión de Riesgos – Ingeniería del Software”, usando una escala cualitativa‑cuantitativa de probabilidad (1–5) e impacto (1–5) y clasificando el nivel de riesgo como Bajo, Moderado o Alto según el producto P×I.
+Los riesgos identificados se han adaptado a la realidad específica de Form‑Creator a partir de listas de chequeo de riesgos de proyectos software y ejemplos.
+8.1 Identificación de riesgos
+Para este proyecto se adopta la escala de probabilidad e impacto propuesta: 
+probabilidad de 1 “muy improbable” a 5 “casi certeza” e impacto de 1 “insignificante” a 5 “catastrófico”; el nivel de riesgo se clasifica como Bajo (1–4), Moderado (5–11) o Alto (12–25) según la matriz de probabilidad e impacto.
+A partir de dicha escala y de las categorías típicas de riesgos (requisitos, equipo, tecnología, ambiente, proceso) se identifican los riesgos clave del proyecto Form‑Creator que se muestran en la siguiente tabla.
+ID
+Riesgo
+Probabilidad (1–5)
+Impacto (1–5)
+Nivel
+R1
+Cambios frecuentes en requisitos y alcance por solicitudes de docente/cliente durante el semestre.
+4
+4
+Alto
+R2
+Fallos o límites de los servicios en la nube (Railway, Vercel, MongoDB Atlas, Brevo) que impidan desplegar o usar el sistema.
+3
+4
+Alto
+R3
+Vulnerabilidades en la autenticación y manejo de datos (mal uso de JWT, contraseñas sin hashing adecuado, exposición de datos de respuestas).
+3
+5
+Alto
+R4
+Inexperiencia del equipo con Django, React y MongoDB que genere retrabajo o decisiones técnicas inadecuadas.
+4
+3
+Alto
+R5
+Descoordinación e inconsistencias entre frontend (React) y backend (API Django + MongoDB) en contratos de datos y validaciones.
+3
+3
+Moderado
+R6
+Baja disponibilidad del equipo por carga académica u otras responsabilidades, afectando la ejecución de sprints.
+4
+3
+Alto
+R7
+Calidad insuficiente del código (pocas pruebas, deuda técnica) que produzca errores en producción o durante la demo.
+3
+4
+Alto
+R8
+Experiencia de usuario deficiente (UI/UX poco clara, mensajes de error confusos) que genere rechazo de usuarios y stakeholders.
+3
+3
+Moderado
+
+Tabla 8.1 – Identificación de riesgos del proyecto
+
+
+8.2 Análisis de riesgos
+En esta sección se analiza el impacto de cada riesgo identificado sobre el cronograma, la calidad y la funcionalidad del sistema, siguiendo el criterio de impacto cualitativo.
+Se pone especial atención a los riesgos clasificados como de nivel Alto, ya que son los que pueden comprometer de forma significativa el cumplimiento de los objetivos del proyecto Form‑Creator.
+
+ID
+Impacto en el cronograma
+Impacto en la calidad
+Impacto en la funcionalidad
+R1
+Retrasos por tener que re‑analizar, rediseñar y re-implementar funcionalidades en mitad de los sprints.
+Aumenta el riesgo de soluciones improvisadas y defectos al implementar cambios con prisa.
+Puede generar funcionalidades incompletas o inconsistentes con la visión final del sistema.
+R2
+Paradas del entorno de pruebas/producción obligan a reprogramar actividades y demos.
+Errores intermitentes difíciles de reproducir pueden degradar la confiabilidad percibida.
+Funciones críticas (login, envío de correos, acceso a formularios) pueden dejar de operar.
+R3
+Incidentes de seguridad pueden forzar pausas para corregir de urgencia y rehacer pruebas.
+Pérdida de confidencialidad e integridad de datos afecta seriamente la percepción de calidad.
+Algunas características (edición de respuestas, enlaces públicos) podrían deshabilitarse temporalmente.
+R4
+Curvas de aprendizaje mayores a lo estimado generan retrasos en desarrollo y pruebas.
+Mayor probabilidad de malas prácticas de diseño y bugs por desconocimiento de frameworks.
+Implementaciones parciales o con limitaciones respecto a lo especificado en el análisis.
+R5
+Retrasos por tener que corregir contratos de API, mapeos de datos y validaciones inconsistentes.
+Aumenta la probabilidad de errores de integración, respuestas erróneas y fallos en front.
+Funcionalidades como crear, responder o visualizar formularios pueden comportarse de forma incorrecta.
+R6
+Incumplimiento de tareas planificadas por sprint y necesidad de re-planificar alcance.
+Menos tiempo para refactorizar y probar implica más deuda técnica acumulada.
+Se podrían dejar por fuera funcionalidades de menor prioridad (p.ej. algunos gráficos o filtros).
+R7
+Necesidad de reprocesar trabajo defectuoso retrasa actividades posteriores en la cadena.
+Mayor cantidad de bugs en producción, degradando usabilidad y robustez del sistema.
+Funciones existentes pueden fallar en escenarios reales (muchos formularios, muchos usuarios).
+R8
+Retrabajo en pantallas y flujos de interacción no previstos en el cronograma inicial.
+Baja usabilidad y mensajes poco claros afectan la percepción de calidad global.
+Los usuarios pueden dejar de usar capacidades importantes aunque estén implementadas.
+
+Tabla 8.2 – Análisis de impacto por dimensión
+
+8.3 Plan de mitigación
+El plan de mitigación se inspira en el esquema RMMM (Risk Mitigation, Monitoring and Management), definiendo estrategias de evitación, mitigación y contingencia sobre los riesgos con nivel Alto y Moderado.
+Para cada riesgo priorizado se plantean acciones concretas, responsables y momento de aplicación, de modo que las actividades preventivas se integren dentro del propio cronograma y de las prácticas ágiles del equipo (sprint planning, dailys, reviews y retrospectivas).
+
+ID
+Estrategia principal
+Acciones de mitigación
+Responsable principal
+R1
+Mitigar/Evitar
+Definir y congelar un alcance mínimo viable al inicio del curso; registrar cada cambio vía solicitud formal y evaluarlo en el sprint planning antes de aceptarlo.
+Product Owner y equipo de desarrollo
+R2
+Mitigar
+Configurar entornos locales robustos; documentar pasos de despliegue; tener al menos un proveedor alterno (p.ej. backup en otro servicio o uso intensivo de entorno local en caso de caída).
+Equipo de desarrollo
+R3
+Mitigar
+Aplicar buenas prácticas de seguridad (hashing de contraseñas, uso correcto de JWT, HTTPS en despliegue), revisar endpoints críticos y hacer pruebas específicas de autenticación y autorización.
+Backend developer (con apoyo del equipo)
+R4
+Mitigar
+Planear tiempo explícito de aprendizaje al inicio (spikes técnicos), reutilizar ejemplos de la documentación oficial y de proyectos anteriores, y hacer revisiones de código entre pares.
+Todo el equipo de desarrollo
+R5
+Mitigar
+Definir contratos de API versionados (modelo de datos acordado), usar herramientas de prueba (Postman, etc.) y revisar cada cambio de modelo antes de mergear al repositorio principal.
+Desarrolladores frontend y backend
+R6
+Mitigar/Aceptar
+Ajustar la capacidad real de cada sprint, priorizar siempre historias de mayor valor y negociar con el docente la reducción de alcance si se evidencia sobrecarga tempranamente.
+Scrum Master y Product Owner
+R7
+Mitigar
+Incluir tareas de pruebas manuales básicas en cada historia, definir una “definición de terminado” que exija casos de prueba y revisar mensajes de error antes de cerrar el sprint.
+Equipo de desarrollo
+R8
+Mitigar
+Prototipar pantallas clave, validar con el docente y compañeros, refinar mensajes y flujos en función del feedback de cada sprint review.
+Equipo de desarrollo y docente stakeholder
+
+Tabla 8.3 – Plan de mitigación de riesgos prioritarios
+
+
+9. Auditoría de la Configuración
+9.1 Objetivo de la auditoría
+Verificar la integridad y consistencia de los artefactos del software.
+9.2 Procedimiento de auditoría
+Actividades realizadas:
+revisión del repositorio
+verificación de versiones
+revisión de documentación
+9.3 Resultados de la auditoría
+Tabla ejemplo:
+Elemento revisado
+Estado
+Observaciones
+
+
+Anexo:  documento sugerid0 en clases
+
+10. Pruebas del Software
+10.1 Estrategia de pruebas
+Tipos de pruebas aplicadas:
+pruebas unitarias
+10.2 Casos de prueba
+ID
+Caso de prueba
+Resultado esperado
+Resultado obtenido
+
+10.3 Evidencias de pruebas
+Capturas de pantalla o reportes de ejecución.
+10.4 Resultados de pruebas
+Análisis de errores encontrados.
+
+11. Resultados del Proyecto
+ Funcionalidades implementadas
+El proyecto Form-Creator logró implementar una plataforma web responsiva orientada a la creación, distribución, respuesta y análisis de formularios empresariales. De acuerdo con el alcance definido, el sistema cubre el ciclo de vida completo del formulario, desde su diseño hasta la visualización de resultados, integrando módulos de gestión de usuarios, gestión de formularios y gestión de respuestas.
+En el módulo de gestión de usuarios, se implementaron funcionalidades tales:
+Registro de nuevos usuarios
+Inicio de sesión tradicional/Autenticación mediante Google/Firebase
+Recuperación de contraseña por OTP 
+Edición de la información del perfil. 
+
+En el módulo de creación y gestión de formularios, el sistema permite al administrador:
+ Diseñar formularios personalizados con preguntas de texto libre, opción múltiple y escala numérica.
+Definir obligatoriedad y validaciones
+Configurar visibilidad
+Guardar borradores
+Publicar y despublicar formularios, editarlos, duplicarlos y eliminarlos. 
+También se habilitó la generación de enlaces únicos de acceso, lo que facilita la distribución controlada sin requerir autenticación obligatoria en formularios públicos. Todas las historias del backlog asociadas a estas capacidades están completadas y el soporte de ello se refleja tanto en el Jira como en el documento de lineamientos del proyecto. 
+En el módulo de respuesta y análisis, se implementó 
+El diligenciamiento público mediante enlace
+La validación de campos obligatorios
+El almacenamiento persistente de respuestas
+La posibilidad de editar respuestas si el formulario lo permite
+El envío de copia de respuestas por correo electrónico 
+La visualización de estadísticas mediante gráficos. El cierre del Sprint 4 evidencia que la funcionalidad de visualización de datos con gráficos fue completada y que el sistema pudo mostrar el producto final ya desplegado y utilizable para los stakeholders.
+Como resultado funcional global, Form-Creator dejó de ser únicamente un recolector de respuestas para convertirse en una solución integral de captura, administración y análisis de información, permitiendo que el usuario administrador gestione formularios y que el respondedor interactúe de manera simple, accesible y validada.
+
+Desempeño del sistema
+El desempeño del sistema fue planteado desde los requerimientos no funcionales con énfasis en disponibilidad, seguridad, compatibilidad y soporte a concurrencia. 
+A nivel técnico, el sistema se construyó con una arquitectura desacoplada entre React en frontend y Django + Django REST Framework en backend, con MongoDB como base de datos. Esta decisión favoreció la mantenibilidad y una interacción fluida entre cliente y servidor mediante JSON y endpoints REST. Asimismo, el uso de Recharts permitió mostrar gráficos interactivos que se actualizan dinámicamente, mientras que React facilitó validaciones en tiempo real y respuesta inmediata a las acciones del usuario.
+En cuanto a ejecución, el proyecto fue probado en desarrollo con React, Django y MongoDB Atlas, y desplegado en producción usando Vercel, Railway y MongoDB Atlas, lo cual permitió contar con una versión funcional accesible desde la web. El hecho de haber llegado a despliegue productivo y sustentación final demuestra un nivel de desempeño suficiente para cumplir el propósito académico y operativo del proyecto. No obstante, se reconoce como aprendizaje la necesidad de reforzar pruebas post despliegue y considerar limitaciones de servidores gratuitos, por lo que el rendimiento logrado puede considerarse satisfactorio, aunque todavía susceptible de optimización.
+Concluyendo, el sistema respondió adecuadamente a operaciones clave como autenticación, creación de formularios, respuesta mediante enlace, validaciones, exportación y visualización gráfica. Esto evidencia que el software alcanzó un desempeño coherente con su alcance: ofrecer una experiencia accesible para el respondedor y una experiencia administrativa robusta para el creador del formulario.
+Cumplimiento de objetivos
+El objetivo general del proyecto consistía en desarrollar una plataforma web capaz de crear formularios personalizables, recopilar respuestas de forma centralizada y generar visualizaciones simples en tiempo real. A partir de las funcionalidades implementadas y del cierre de las historias del backlog, puede afirmarse que este objetivo fue cumplido de manera satisfactoria.
+Añadiendo, el sistema cumplió con metas de negocio importantes definidas en el análisis, como optimizar el ciclo de recolección de datos, democratizar el análisis para usuarios no técnicos, eliminar barreras técnicas en la creación de formularios y mejorar la calidad de la información desde el origen a través de validaciones. 
+Finalmente, estos resultados muestran que Form-Creator no solo cumplió con los objetivos, sino que también materializó una solución funcional y coherente con una necesidad real.
+
+12. Conclusiones
+El desarrollo de Form-Creator permitió comprobar que una necesidad frecuente en empresas y organizaciones —la recolección y análisis de datos mediante formularios— puede resolverse eficazmente mediante una plataforma web bien estructurada. La solución construida alcanzó un nivel funcional que permite crear, publicar, responder y analizar formularios, integrando autenticación, validaciones, persistencia de datos y reportes gráficos dentro de un mismo sistema. 
+Uno de los principales aprendizajes obtenidos fue la importancia de definir correctamente el modelo de datos, documentar historias de usuario, criterios de aceptación y casos de uso, y mantener trazabilidad entre análisis, diseño e implementación. También se evidenció el valor de coordinar adecuadamente frontend y backend, especialmente cuando se manejan cambios en estructuras de datos, integraciones externas y validaciones cruzadas entre cliente y servidor. 
+El proyecto también permitió reafirmar la importancia de aplicar ingeniería de software de manera rigurosa. La combinación de un enfoque híbrido entre documentación formal y prácticas ágiles fue adecuada para el contexto académico del equipo. La ingeniería de software aportó orden, trazabilidad, claridad de requisitos, control del alcance y capacidad de adaptación durante la implementación. Gracias a ello, el equipo pudo avanzar por sprints con una base documental sólida y con entregas incrementales que fueron refinando la solución sin perder coherencia con los objetivos iniciales.
+En cuanto a las dificultades encontradas, el equipo de trabajo evidencia retos asociados a la integración frontend-backend, a la necesidad de mejorar la cobertura de pruebas, a la dependencia de servicios externos como correo transaccional y Firebase, y a las limitaciones del despliegue sobre infraestructura gratuita. También existieron desafíos relacionados con la consistencia de validaciones, la edición de formularios ya respondidos y la necesidad de preservar integridad en la base de datos. Sin embargo, estas dificultades no impidieron la entrega del sistema; por el contrario, se convirtieron en oportunidades de aprendizaje técnico y metodológico para el equipo.
+En síntesis, Form-Creator demuestra que la aplicación disciplinada de la ingeniería de software permite transformar una idea académica en una solución real, funcional y extensible. Aunque el sistema todavía tiene oportunidades de mejora, el proyecto logró establecer una base sólida tanto desde el punto de vista tecnológico como desde la perspectiva del proceso de desarrollo.
+13. Recomendaciones
+Mejora del sistema
+Se recomienda fortalecer la plataforma en aspectos de robustez, escalabilidad y experiencia de usuario. 
+Desde el punto de vista técnico, sería recomendable robustecer la seguridad con mejores mecanismos de encriptación de contraseña y controles de sesión. 
+En cuanto a la experiencia de usuario, se piensa en formas más accesibles para compartir y acceder a encuestas, a través de diferentes medios y en otros formatos como QR. Actualmente se utilizan enlaces compartidos por correo electrónico. 
+Por otro lado, una funcionalidad adicional útil para el sistema también es la exportación de gráficas en pdf. Esta feature está prevista por experiencia de usuario, con el fin de que este tenga una forma de acceder a su información rápidamente sin obligarlo a ingresar a la web. Esto se alinea con el objetivo general del sistema. 
+Mejoras en la gestión del proyecto
+Convendría mantener y profundizar el enfoque híbrido utilizado, pero reforzando la etapa de pruebas y control de calidad dentro de cada sprint. Las retrospectivas muestran que se logró una buena organización mediante Scrum, aunque sería beneficioso institucionalizar mejor las pruebas técnicas antes de cada review y después del despliegue.
+Asimismo, se requiere  mejorar la planificación del backlog con una mayor precisión en la dependencia entre historias y en el impacto de cambios estructurales, sobre todo cuando se afectan formularios publicados o respuestas persistidas. También sería útil mantener una documentación viva más compacta y orientada a cambios incrementales, para que el mantenimiento evolutivo sea más simple y menos costoso en tiempo.
+Trabajo futuro
+Form-Creator podría incorporar varias de las funcionalidades que quedaron expresamente fuera del alcance actual: autenticación avanzada, lógica condicional compleja en formularios, carga de archivos, reportes más sofisticados. Estas extensiones serían coherentes con la arquitectura modular ya definida.
+También sería pertinente ampliar el módulo analítico con exportación a otros formatos, visualizaciones comparativas, análisis por periodos, indicadores de desempeño y paneles más cercanos a inteligencia de negocio.
+
+14. Referencias Bibliográficas
+Pressman, R. S., & Maxim, B. R. (2020). Software Engineering: A Practitioner’s Approach (9th ed.). McGraw-Hill.
+Sommerville, I. (2019). Software Engineering (10th ed.). Pearson.
+IEEE Computer Society. (2014). Guide to the Software Engineering Body of Knowledge (SWEBOK V3.0). IEEE.
+Schwaber, K., & Sutherland, J. (2020). The Scrum Guide. Scrum.org.
+15. Anexos
+
+Concepto
+Descripción
+Ubicación
+Plan del proyecto
+
+
+
+
+Matriz de riesgos
+Se presenta la matriz de riesgos en el formato sugerido (código, riesgo, probabilidad, impacto y total), utilizando la escala de probabilidad/impacto y los rangos de clasificación (Bajo: 1–4, Moderado: 5–11, Alto: 12–25).
+
+
+https://docs.google.com/spreadsheets/d/1X_HOGed35ja4igzpus7v59mOru5n2EuKQtW8Vq0a0Fg/edit?usp=drive_link
+
+
+Registro de cambios
+
+
+
+
+Evidencias de pruebas 
+
+
+
+
+Diagramas del sistema
+Se presentan los siguientes diagramas hechos para el proyecto Form-Creator
+https://drive.google.com/drive/folders/1lKdQf0hXtgPxptqZm-OZcHLZ-Y9t3SlF?usp=sharing
+
+
+
+
+
