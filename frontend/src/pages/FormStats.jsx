@@ -120,6 +120,7 @@ export default function FormStats() {
         };
 
         fetchStats();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [formId]);
 
     const handleExport = () => {

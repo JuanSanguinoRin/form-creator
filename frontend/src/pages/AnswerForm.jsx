@@ -1,6 +1,5 @@
-// src/pages/AnswerForm.jsx
 import { useEffect, useState } from "react";
-import { useParams, useNavigate, useLocation } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import "../css/CreateForm.css";
 import AuthModal from "../components/AuthModal";
 import AnswerEditModal from "../components/AnswerEditModal";
@@ -9,7 +8,6 @@ import SingleResponseAuthModal from "../components/SingleResponseAuthModal";
 function AnswerForm() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const location = useLocation();
   const [formulario, setFormulario] = useState(null);
   const [respuestas, setRespuestas] = useState({});
   const [errors, setErrors] = useState({}); // 🆕 Estado para errores de validación
@@ -188,6 +186,7 @@ function AnswerForm() {
         }
       })
       .catch(err => console.error(err));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, navigate]);
 
   useEffect(() => {

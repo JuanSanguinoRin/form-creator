@@ -20,7 +20,6 @@ export default function CreateForm() {
   const [descripcion, setDescripcion] = useState("");
   const [preguntas, setPreguntas] = useState([defaultQuestion(1)]);
   const [nextId, setNextId] = useState(2);
-  const [enviandoInvitaciones, setEnviandoInvitaciones] = useState(false);
 
   // 🔧 Configuración del formulario (actualizada con nuevos campos)
   const [config, setConfig] = useState({
@@ -190,8 +189,6 @@ export default function CreateForm() {
       return;
     }
 
-    setEnviandoInvitaciones(true);
-
     try {
       const res = await fetch(`https://form-creator-production.up.railway.app/api/formularios/${formId}/invitar/`, {
         method: "POST",
@@ -212,8 +209,6 @@ export default function CreateForm() {
     } catch (error) {
       console.error("❌ Error al enviar invitaciones:", error);
       alert("⚠️ Error de conexión al enviar invitaciones");
-    } finally {
-      setEnviandoInvitaciones(false);
     }
   };
 

@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 const Home = () => {
   const navigate = useNavigate();
   const [formularios, setFormularios] = useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState(true);
   const [menuAbierto, setMenuAbierto] = useState(null);
   const [user, setUser] = useState(null);
@@ -69,6 +70,7 @@ const Home = () => {
     setMenuAbierto(null);
   };
   // 📊 Ver analíticas
+  // eslint-disable-next-line no-unused-vars
   const handleAnaliticas = (id) => {
     console.log("📊 Ver analíticas:", id);
     alert("🚧 Funcionalidad de analíticas en desarrollo");
