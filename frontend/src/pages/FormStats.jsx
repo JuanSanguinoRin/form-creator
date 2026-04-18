@@ -89,6 +89,17 @@ export default function FormStats() {
                 const data = await res.json();
                 console.log("📊 Estadísticas recibidas (raw):", data);
 
+                let formTitle = "Formulario";
+                try {
+                    const resForm = await fetch(`https://form-creator-production.up.railway.app/api/formularios/${formId}/`);
+                    if (resForm.ok) {
+                        const dataForm = await resForm.json();
+                        if (dataForm.titulo) formTitle = dataForm.titulo;
+                    }
+                } catch (e) {
+                    console.error("Error al obtener el título del formulario:", e);
+                }
+
                 // Normalizar estructuras que usamos en los gráficos
                 const dispositivos = normalizeSeries(data.dispositivos || data.devices || data.devices_stats);
                 const navegadores = normalizeSeries(data.navegadores || data.browsers || data.browser_stats);
@@ -105,6 +116,7 @@ export default function FormStats() {
 
                 const normalized = {
                     ...data,
+                    formTitle,
                     dispositivos,
                     navegadores,
                     preguntas,
@@ -159,7 +171,8 @@ export default function FormStats() {
                 heightLeft -= pdfHeight;
             }
 
-            pdf.save(`Estadisticas_Formulario_${formId}.pdf`);
+            const safeTitle = (stats?.formTitle || `Formulario_${formId}`).replace(/[^a-zA-Z0-9_\-]/g, "_");
+            pdf.save(`Estadisticas_${safeTitle}.pdf`);
         } catch (error) {
             console.error("Error al generar PDF:", error);
             alert("Hubo un error al generar el PDF. Por favor, intenta de nuevo.");
