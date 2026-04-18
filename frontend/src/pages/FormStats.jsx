@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 import { useParams, useNavigate } from "react-router-dom";
 import {
     PieChart, Pie, Cell, Tooltip, ResponsiveContainer,
@@ -15,6 +17,8 @@ export default function FormStats() {
     const [stats, setStats] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [isExportingPDF, setIsExportingPDF] = useState(false);
+    const printRef = useRef(null);
 
     // --- Util: detectar navegador y tipo de dispositivo ---
     function getClientInfo() {
@@ -122,6 +126,47 @@ export default function FormStats() {
         window.open(`https://form-creator-production.up.railway.app/api/formularios/${formId}/exportar/`, '_blank');
     };
 
+    const handleExportPDF = async () => {
+        const element = printRef.current;
+        if (!element) return;
+
+        setIsExportingPDF(true);
+        try {
+            const canvas = await html2canvas(element, {
+                scale: 2,
+                useCORS: true,
+                logging: false,
+                backgroundColor: "#ffffff"
+            });
+            const imgData = canvas.toDataURL("image/png");
+
+            const pdf = new jsPDF("p", "mm", "a4");
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            const pdfHeight = pdf.internal.pageSize.getHeight();
+
+            const imgHeight = (canvas.height * pdfWidth) / canvas.width;
+            let heightLeft = imgHeight;
+            let position = 0;
+
+            pdf.addImage(imgData, "PNG", 0, position, pdfWidth, imgHeight);
+            heightLeft -= pdfHeight;
+
+            while (heightLeft > 0) {
+                position = heightLeft - imgHeight;
+                pdf.addPage();
+                pdf.addImage(imgData, "PNG", 0, position, pdfWidth, imgHeight);
+                heightLeft -= pdfHeight;
+            }
+
+            pdf.save(`Estadisticas_Formulario_${formId}.pdf`);
+        } catch (error) {
+            console.error("Error al generar PDF:", error);
+            alert("Hubo un error al generar el PDF. Por favor, intenta de nuevo.");
+        } finally {
+            setIsExportingPDF(false);
+        }
+    };
+
     if (loading) return (
         <div className="create-form-main">
             <div className="stats-loading">Cargando estadísticas...</div>
@@ -150,7 +195,7 @@ export default function FormStats() {
             </div>
 
             {/* Sección principal */}
-            <section className="create-section-main">
+            <section className="create-section-main" ref={printRef}>
                 <div className="stats-header">
                     <h2>📊 Estadísticas del Formulario</h2>
                 </div>
@@ -295,8 +340,16 @@ export default function FormStats() {
                 <h3 className="create-sidebar-title">ℹ️ Información</h3>
 
                 <div className="create-config-group">
-                    <button className="create-btn-save" onClick={handleExport} style={{ width: '100%', marginBottom: '20px' }}>
+                    <button className="create-btn-save" onClick={handleExport} style={{ width: '100%', marginBottom: '10px' }}>
                         📥 Exportar CSV
+                    </button>
+                    <button 
+                        className="create-btn-save" 
+                        onClick={handleExportPDF} 
+                        disabled={isExportingPDF}
+                        style={{ width: '100%', marginBottom: '20px', backgroundColor: isExportingPDF ? '#aaa' : '#D9534F' }}
+                    >
+                        {isExportingPDF ? "⏳ Generando PDF..." : "📄 Exportar PDF"}
                     </button>
 
                     <div className="stats-info-item">
