@@ -234,12 +234,8 @@ function AnswerForm() {
 
         const num = parseFloat(newValue);
 
-        // Auto-corregir máximo
-        if (validaciones?.valor_maximo !== undefined && num > validaciones.valor_maximo) {
-          newValue = validaciones.valor_maximo;
-        }
-
-        // Nota: No corregimos mínimo mientras escribe para no bloquear la entrada (ej: escribir "10" con min "5")
+        // Nota: No corregimos los valores extremos mientras escribe para no bloquear la entrada (ej: escribir "10" con min "5")
+        // Dejamos que las advertencias visuales y la validación del enviador se encarguen de notificar al usuario.
       }
     }
 

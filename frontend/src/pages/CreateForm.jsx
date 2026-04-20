@@ -225,6 +225,21 @@ export default function CreateForm() {
       return;
     }
 
+    // 🆕 Validación: Verificar rangos numéricos y longitudes
+    const errorRango = preguntas.find(p => {
+      if (p.tipo === "escala_numerica" && p.validaciones) {
+        if (p.validaciones.valor_maximo !== undefined && p.validaciones.valor_minimo !== undefined) {
+          if (p.validaciones.valor_maximo < p.validaciones.valor_minimo) return true;
+        }
+      }
+      return false;
+    });
+
+    if (errorRango) {
+      alert(`⚠️ En la pregunta "${errorRango.enunciado || 'sin enunciado'}", el valor máximo no puede ser menor que el valor mínimo.`);
+      return;
+    }
+
     const payload = {
       titulo,
       descripcion,
